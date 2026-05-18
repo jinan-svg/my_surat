@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pengajuan Admin</title>
+</head>
+<body>
+
+<h1>Dashboard Admin</h1>
+
+<h3>Total Pending: {{ total_pending }}</h3>
+<h3>Total Disetujui: {{ total_disetujui }}</h3>
+<h3>Total Ditolak: {{ total_ditolak }}</h3>
+
+<hr>
+
+{% for surat in data_surat %}
+
+<div style="border:1px solid black; padding:15px; margin-bottom:10px;">
+
+    <h3>{{ surat.nomor_surat }}</h3>
+
+    <p>Tujuan: {{ surat.tujuan }}</p>
+
+    <p>Perihal: {{ surat.perihal }}</p>
+
+    <p>Status: {{ surat.status }}</p>
+
+    <a href="/setujui-surat/{{ surat.id }}">
+        <button>SETUJUI</button>
+    </a>
+
+    <a href="/tolak-surat/{{ surat.id }}">
+        <button>TOLAK</button>
+    </a>
+
+</div>
+
+{% endfor %}
+
+</body>
+</html>

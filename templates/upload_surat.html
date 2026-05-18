@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Upload Surat - My Surat</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script defer
+    src="{{ url_for('static', filename='js/style.js') }}"></script>
+
+</head>
+
+<body>
+
+<div class="upload-frame">
+
+    <!-- BACK -->
+    <a href="{{ url_for('dashboard') }}"
+    class="upload-back">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+    </a>
+
+
+    <!-- TITLE -->
+    <h1 class="upload-title">
+        Upload Surat
+    </h1>
+
+    <p class="upload-subtitle">
+        masukkan surat yang sudah di acc
+    </p>
+
+
+    <!-- FORM -->
+    <form method="POST"
+    enctype="multipart/form-data"
+    class="upload-form">
+
+
+        <!-- FILE -->
+        <div class="upload-file-box">
+
+            <h3>Pilih File Surat</h3>
+
+            <p>
+                Format PDF, DOCX, JPG, PNG
+            </p>
+
+            <div class="file-input-box">
+
+                <input type="file"
+                name="file_surat"
+                id="fileSurat"
+                required>
+
+            </div>
+
+        </div>
+
+
+        <!-- NOMOR SURAT -->
+        <label>Nomor Surat</label>
+
+        <input type="text"
+        id="nomorSurat"
+        placeholder="Pilih surat di bawah"
+        readonly>
+
+
+        <!-- PILIH SURAT -->
+        <label>Jenis Surat</label>
+
+        <select name="surat_id"
+        id="pilihSurat"
+        required
+        onchange="pilihDataSurat()">
+
+            <option value="">
+                Pilih Surat
+            </option>
+
+            {% for surat in surat_disetujui %}
+
+            <option
+            value="{{ surat.id }}"
+            data-nomor="{{ surat.nomor_surat }}"
+            data-perihal="{{ surat.perihal }}">
+
+                {{ surat.nomor_surat }} - {{ surat.perihal }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+
+        <!-- PERIHAL -->
+        <label>Perihal</label>
+
+        <input type="text"
+        id="perihalSurat"
+        placeholder="Masukkan perihal surat"
+        readonly>
+
+
+        <!-- BUTTON -->
+        <button type="submit"
+        class="btn-upload-surat">
+
+            Upload
+
+        </button>
+
+    </form>
+
+</div>
+
+
+<!-- SCRIPT -->
+<script>
+
+function pilihDataSurat() {
+
+    let select =
+        document.getElementById("pilihSurat");
+
+    let selectedOption =
+        select.options[select.selectedIndex];
+
+    document.getElementById("nomorSurat").value =
+        selectedOption.getAttribute("data-nomor") || "";
+
+    document.getElementById("perihalSurat").value =
+        selectedOption.getAttribute("data-perihal") || "";
+
+}
+
+</script>
+
+</body>
+</html>

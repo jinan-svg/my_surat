@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Surat Masuk
+{% endblock %}
+
+{% block content %}
+
+<h3>Edit Surat Masuk</h3>
+
+<form method="POST">
+
+<div class="mb-3">
+<label>Nomor Surat</label>
+<input type="text"
+class="form-control"
+name="nomor_surat"
+value="{{ surat.nomor_surat }}">
+</div>
+
+<div class="mb-3">
+<label>Pengirim</label>
+<input type="text"
+class="form-control"
+name="pengirim"
+value="{{ surat.pengirim }}">
+</div>
+
+<div class="mb-3">
+<label>Perihal</label>
+<input type="text"
+class="form-control"
+name="perihal"
+value="{{ surat.perihal }}">
+</div>
+
+<button type="submit" class="btn btn-primary">
+Simpan Perubahan
+</button>
+
+</form>
+
+{% endblock %}

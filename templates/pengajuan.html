@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Pengajuan Surat - My Surat</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="surat-baru-frame">
+
+    <div class="surat-baru-topbar">
+        <a href="{{ url_for('dashboard') }}" class="surat-back">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <div>
+            <h2>PENGAJUAN SURAT</h2>
+            <p>daftar surat yang menunggu persetujuan</p>
+        </div>
+
+        <div class="surat-user-icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+    </div>
+
+    <div class="pengajuan-content">
+
+        <h1 class="surat-page-title">Daftar Pengajuan</h1>
+        <p class="surat-page-subtitle">Surat yang dibuat akan diperiksa sebelum masuk ke surat keluar</p>
+
+        <div class="pengajuan-table-box">
+
+            <table class="surat-table">
+                <thead>
+                    <tr>
+                        <th>No. Surat</th>
+                        <th>Perihal</th>
+                        <th>Tujuan</th>
+                        <th>Jenis</th>
+                        <th>Status</th>
+                        <th>Catatan Revisi</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for surat in data_surat %}
+                    <tr>
+                        <td>{{ surat.nomor_surat }}</td>
+                        <td>{{ surat.perihal }}</td>
+                        <td>{{ surat.tujuan }}</td>
+                        <td>{{ surat.jenis_template }}</td>
+
+                        <td>
+                            {% if surat.status == "Diajukan" %}
+                                <span class="badge status-menunggu">Menunggu</span>
+                            {% elif surat.status == "Revisi" %}
+                                <span class="badge status-revisi">Revisi</span>
+                            {% elif surat.status == "Disetujui" %}
+                                <span class="badge status-baca">Disetujui</span>
+                            {% elif surat.status == "Ditolak" %}
+                                <span class="badge status-tolak">Ditolak</span>
+                            {% else %}
+                                <span class="badge status-belum">{{ surat.status }}</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if surat.catatan_revisi %}
+                                {{ surat.catatan_revisi }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            <a href="#">
+                                Detail
+                            </a>
+
+                            {% if surat.status == "Diajukan" %}
+                                <a href="{{ url_for('approve_surat_keluar', id=surat.id) }}" class="btn-approve">
+                                    Setujui
+                                </a>
+
+                                <a href="{{ url_for('tolak_surat_keluar', id=surat.id) }}" class="btn-tolak">
+                                    Tolak
+                                </a>
+                            {% endif %}
+
+                            {% if surat.status == "Ditolak" %}
+                                <a href="{{ url_for('edit_surat_keluar', id=surat.id) }}" class="btn-revisi">
+                                    Revisi
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7">Belum ada pengajuan surat.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

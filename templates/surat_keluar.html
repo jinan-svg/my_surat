@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %}
+Surat Keluar
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <!-- JUDUL -->
+    <div class="mb-4">
+
+        <h2 style="font-weight:700; color:#d8891c;">
+            Surat Keluar
+        </h2>
+
+        <p style="color:gray;">
+            Data surat keluar yang sudah dikirim
+        </p>
+
+    </div>
+
+
+    <!-- CARD -->
+    <div class="card shadow-sm border-0"
+    style="border-radius:20px;">
+
+        <!-- HEADER -->
+        <div class="card-header text-white d-flex justify-content-between align-items-center"
+        style="background:#d8891c;
+        border-radius:20px 20px 0 0;">
+
+            <span>
+                Data Surat Keluar
+            </span>
+
+            <div class="d-flex gap-2">
+
+                <!-- EXPORT -->
+                <a href="{{ url_for('export_excel') }}"
+                class="btn btn-success btn-sm">
+
+                    <i class="bi bi-file-earmark-excel"></i>
+                    Export Excel
+
+                </a>
+
+                <!-- BUAT SURAT -->
+                <a href="{{ url_for('surat_baru') }}"
+                class="btn btn-light btn-sm">
+
+                    <i class="bi bi-plus-circle"></i>
+                    Buat Surat
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- BODY -->
+        <div class="card-body">
+
+            <table class="table align-middle">
+
+                <thead style="background:#fff4df;">
+
+                    <tr>
+
+                        <th>No</th>
+                        <th>Nomor Surat</th>
+                        <th>Tujuan</th>
+                        <th>Perihal</th>
+                        <th>Status</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for surat in data_surat %}
+
+                    <tr>
+
+                        <!-- NO -->
+                        <td>{{ loop.index }}</td>
+
+                        <!-- NOMOR -->
+                        <td>{{ surat.nomor_surat }}</td>
+
+                        <!-- TUJUAN -->
+                        <td>{{ surat.tujuan }}</td>
+
+                        <!-- PERIHAL -->
+                        <td>{{ surat.perihal }}</td>
+
+                        <!-- STATUS -->
+                        <td>
+
+                            <span class="badge"
+                            style="background:#d8891c;
+                            padding:8px 12px;
+                            border-radius:10px;">
+
+                                {{ surat.status }}
+
+                            </span>
+
+                        </td>
+
+                        <!-- TANGGAL -->
+                        <td>
+
+                            {% if surat.tanggal %}
+                                {{ surat.tanggal.strftime('%d-%m-%Y') }}
+                            {% else %}
+                                -
+                            {% endif %}
+
+                        </td>
+
+                        <!-- AKSI -->
+                        <td class="d-flex gap-1">
+
+                            <!-- DETAIL -->
+                            <a href="{{ url_for('detail_surat_keluar', id=surat.id) }}"
+                            class="btn btn-sm text-white"
+                            style="background:#0d6efd;
+                            border:none;
+                            border-radius:10px;">
+
+                                <i class="bi bi-eye"></i>
+
+                            </a>
+
+
+                            <!-- EDIT -->
+                            <a href="{{ url_for('edit_surat_keluar', id=surat.id) }}"
+                            class="btn btn-sm text-white"
+                            style="background:#ffc107;
+                            border:none;
+                            border-radius:10px;">
+
+                                <i class="bi bi-pencil"></i>
+
+                            </a>
+
+                            <!-- HAPUS -->
+                            <a href="{{ url_for('hapus_surat_keluar', id=surat.id) }}"
+                            class="btn btn-sm text-white"
+                            style="background:#dc3545;
+                            border:none;
+                            border-radius:10px;"
+                            onclick="return confirm('Yakin ingin menghapus surat ini?')">
+
+                                <i class="bi bi-trash"></i>
+
+                                
+
+                            </a>
+
+
+                            <!-- DOWNLOAD FILE -->
+                            {% if surat.file_path %}
+
+                        
+                            <a href="{{ url_for('download_file', filename=surat.file_path) }}"
+                            class="btn btn-sm text-white"
+                            style="background:#198754;
+                            border:none;
+                            border-radius:10px;">
+
+                                <i class="bi bi-download"></i>
+
+                            </a>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

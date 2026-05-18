@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Surat Masuk</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+<div class="dashboard-frame">
+
+    <!-- TOPBAR -->
+
+    <div class="dashboard-topbar">
+
+        <a href="{{ url_for('dashboard') }}" class="dash-back">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <div class="dash-title">
+            <h2>SURAT MASUK</h2>
+            <p>Kelola surat masuk</p>
+        </div>
+
+        <div class="dash-user-icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+    </div>
+
+
+    <!-- CONTENT -->
+
+    <div class="dashboard-content">
+
+        <div class="welcome-box">
+
+            <h1>Data Surat Masuk</h1>
+
+            <p>
+                Total surat masuk:
+                {{ surat_list|length }}
+            </p>
+
+        </div>
+
+
+        <!-- BUTTON -->
+
+        <button class="btn-simpan-surat"
+        onclick="document.getElementById('modalTambah').style.display='block'">
+
+            <i class="fa-solid fa-plus"></i>
+            Tambah Surat Masuk
+
+        </button>
+
+
+        <!-- TABLE -->
+
+        <div class="pengajuan-table-box">
+
+            <table class="surat-table">
+
+                <thead>
+
+                    <tr>
+                        <th>No</th>
+                        <th>Nomor Surat</th>
+                        <th>Pengirim</th>
+                        <th>Tanggal</th>
+                        <th>Perihal</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for surat in surat_list %}
+
+                    <tr>
+
+                        <td>{{ loop.index }}</td>
+
+                        <td>
+                            {{ surat.nomor_surat }}
+                        </td>
+
+                        <td>
+                            {{ surat.pengirim }}
+                        </td>
+
+                        <td>
+                            {{ surat.tanggal.strftime('%d-%m-%Y') }}
+                        </td>
+
+                        <td>
+                            {{ surat.perihal }}
+                        </td>
+
+                        <td>
+
+                            <span class="badge status-baca">
+
+                                {{ surat.status }}
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <!-- PREVIEW -->
+
+                            <a href="{{ url_for('preview_file', filename=surat.file_path) }}"
+                            class="btn-lihat"
+                            target="_blank">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div id="modalTambah" class="custom-modal">
+
+    <div class="custom-modal-content">
+
+        <h2 class="modal-title">
+            Tambah Surat Masuk
+        </h2>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <div class="modal-group">
+
+                <label>Nomor Surat</label>
+
+                <input type="text"
+                name="nomor_surat"
+                required>
+
+            </div>
+
+
+            <div class="modal-group">
+
+                <label>Pengirim</label>
+
+                <input type="text"
+                name="pengirim">
+
+            </div>
+
+
+            <div class="modal-group">
+
+                <label>Tanggal</label>
+
+                <input type="date"
+                name="tanggal">
+
+            </div>
+
+
+            <div class="modal-group">
+
+                <label>Perihal</label>
+
+                <input type="text"
+                name="perihal">
+
+            </div>
+
+
+            <div class="modal-group">
+
+                <label>Upload File</label>
+
+                <input type="file"
+                name="file">
+
+            </div>
+
+
+            <button type="submit"
+            class="btn-simpan-surat">
+
+                Simpan Surat
+
+            </button>
+
+        </form>
+
+        <button
+        onclick="document.getElementById('modalTambah').style.display='none'"
+        class="btn-tolak-submit">
+
+            Tutup
+
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+</html>

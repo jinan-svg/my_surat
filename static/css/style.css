@@ -1,0 +1,1337 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    background: #eeeeee;
+}
+
+/* ================= LOGIN PAGE ================= */
+
+.page-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    width: 720px;
+    height: 590px;
+    background: #ffffff;
+}
+
+.login-header {
+    width: 100%;
+    height: 88px;
+    background: #DD9E59;
+    padding-left: 47px;
+    padding-top: 17px;
+}
+
+.login-header h1 {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.login-header p {
+    color: #111111;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.login-form {
+    width: 100%;
+    padding-top: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-box {
+    width: 430px;
+    height: 78px;
+    background: #f3eee4;
+    border-radius: 13px;
+    margin-bottom: 31px;
+    display: flex;
+    align-items: center;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.25);
+}
+
+.input-box i {
+    font-size: 22px;
+    color: #000000;
+    margin-left: 29px;
+    margin-right: 35px;
+}
+
+.input-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 700;
+    color: #777777;
+}
+
+.input-box input::placeholder {
+    color: #c8c3bd;
+    font-weight: 700;
+}
+
+.password-box {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 22px;
+    margin: 0 !important;
+    font-size: 19px !important;
+    color: #222222 !important;
+    cursor: pointer;
+}
+
+.btn-login {
+    width: 375px;
+    height: 76px;
+    background: #DD9E59;
+    color: #ffffff;
+    border: none;
+    border-radius: 16px;
+    font-size: 22px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 22px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.25);
+}
+
+.register-link {
+    margin-top: 22px;
+    text-decoration: none;
+    color: #DD9E59;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+/* ================= REGISTER PAGE ================= */
+
+.register-wrapper {
+    align-items: flex-start;
+    padding-top: 90px;
+}
+
+.register-card {
+    width: 720px;
+    height: 620px;
+    background: #ffffff;
+    position: relative;
+}
+
+.back-btn {
+    position: absolute;
+    top: 17px;
+    left: 22px;
+    color: #000000;
+    font-size: 34px;
+    text-decoration: none;
+}
+
+.register-title {
+    text-align: center;
+    color: #DD9E59;
+    font-size: 37px;
+    font-weight: 900;
+    padding-top: 55px;
+    margin-bottom: 20px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-form .input-box {
+    width: 430px;
+    height: 76px;
+    margin-bottom: 18px;
+    border-radius: 20px;
+}
+
+.register-form .input-box i {
+    font-size: 30px;
+    margin-left: 31px;
+    margin-right: 34px;
+}
+
+.register-form .input-box input {
+    font-size: 14px;
+}
+
+.btn-register {
+    width: 375px;
+    height: 75px;
+    background: #DD9E59;
+    color: #ffffff;
+    border: none;
+    border-radius: 16px;
+    font-size: 22px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 16px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.25);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media screen and (max-width: 768px) {
+    .login-card,
+    .register-card {
+        width: 90%;
+    }
+
+    .input-box,
+    .register-form .input-box {
+        width: 80%;
+    }
+
+    .btn-login,
+    .btn-register {
+        width: 70%;
+    }
+
+    .login-header {
+        padding-left: 35px;
+    }
+}
+
+/* ================= DASHBOARD BARU SESUAI DESAIN ================= */
+
+.dashboard-frame {
+    width: 895px;
+    min-height: 1475px;
+    margin: 0 auto;
+    background: #f5efe4;
+}
+
+.dashboard-topbar {
+    height: 62px;
+    background: #e3a153;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.dash-back {
+    color: #000000;
+    font-size: 34px;
+    margin-left: 13px;
+    margin-right: 32px;
+    text-decoration: none;
+}
+
+.dash-title h2 {
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+}
+
+.dash-title p {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 3px;
+}
+
+.dash-user-icon {
+    width: 58px;
+    height: 48px;
+    background: #f0c78e;
+    border-radius: 50%;
+    position: absolute;
+    right: 22px;
+    top: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dash-user-icon i {
+    font-size: 31px;
+    color: #000000;
+}
+
+.dashboard-content {
+    padding: 15px 65px 55px 65px;
+}
+
+.welcome-box {
+    margin-bottom: 36px;
+}
+
+.welcome-box h1 {
+    font-size: 21px;
+    font-weight: 900;
+    color: #111111;
+}
+
+.welcome-box p {
+    color: #c8c1b6;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 12px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: 295px 295px;
+    column-gap: 95px;
+    row-gap: 38px;
+    margin-left: 10px;
+}
+
+.summary-card {
+    height: 108px;
+    background: #fff0cf;
+    border-radius: 4px;
+    padding: 17px 17px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-card h3 {
+    font-size: 14px;
+    color: #4d4d4d;
+    font-weight: 900;
+    margin-bottom: 9px;
+}
+
+.summary-card h2 {
+    font-size: 20px;
+    color: #d99949;
+    font-weight: 900;
+    margin-bottom: 14px;
+}
+
+.summary-card p {
+    font-size: 13px;
+    color: #dfd5c5;
+    font-weight: 800;
+}
+
+.summary-icon {
+    width: 48px;
+    height: 43px;
+    background: #eee6d7;
+    color: #222222;
+    border-radius: 5px;
+    font-size: 31px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.active-summary {
+    border: 5px solid #fff0cf;
+    border-radius: 13px;
+}
+
+.red-dot {
+    width: 20px;
+    height: 20px;
+    background: #e91825;
+    border-radius: 50%;
+    position: absolute;
+    top: -4px;
+    right: 54px;
+}
+
+.aksi-title {
+    text-align: center;
+    color: #df9c4d;
+    font-size: 30px;
+    font-weight: 900;
+    margin-top: 68px;
+    margin-bottom: 75px;
+}
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: 210px 210px 210px;
+    column-gap: 55px;
+    row-gap: 48px;
+}
+
+.quick-card {
+    height: 110px;
+    background: #fff0cf;
+    text-decoration: none;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 18px rgba(255, 229, 178, 0.55);
+}
+
+.quick-circle {
+    width: 58px;
+    height: 58px;
+    background: #df9c4d;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 13px;
+}
+
+.quick-circle i {
+    font-size: 28px;
+    color: #000000;
+}
+
+.quick-card p {
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.surat-terbaru-section {
+    background: #ffffff;
+    padding-top: 18px;
+}
+
+.surat-terbaru-section h1 {
+    color: #df9c4d;
+    font-size: 30px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.surat-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.surat-table th {
+    background: #fff0cf;
+    color: #3b3b3b;
+    font-size: 18px;
+    font-weight: 900;
+    height: 64px;
+    border: 5px solid #dddddd;
+}
+
+.surat-table td {
+    height: 55px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 900;
+    color: #111111;
+    border-left: 5px solid #dddddd;
+    border-right: 5px solid #dddddd;
+}
+
+.surat-table tbody tr:last-child td {
+    border-bottom: 5px solid #dddddd;
+}
+
+.file-table-icon {
+    color: #9b9365;
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+.badge {
+    display: inline-block;
+    min-width: 70px;
+    padding: 8px 12px;
+    border-radius: 18px;
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.jenis-masuk,
+.jenis-keluar {
+    background: #fff0cf;
+    color: #df9c4d;
+}
+
+.status-baca {
+    background: #df9c4d;
+    color: #ffffff;
+}
+
+.status-belum {
+    background: #8f8f8f;
+    color: #ffffff;
+}
+
+/* ================= SURAT BARU ================= */
+
+.surat-baru-frame {
+    width: 895px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background: #f5efe4;
+}
+
+.surat-baru-topbar {
+    height: 62px;
+    background: #e3a153;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.surat-back {
+    color: #000000;
+    font-size: 34px;
+    margin-left: 13px;
+    margin-right: 32px;
+    text-decoration: none;
+}
+
+.surat-baru-topbar h2 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.surat-baru-topbar p {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.surat-user-icon {
+    width: 58px;
+    height: 48px;
+    background: #f0c78e;
+    border-radius: 50%;
+    position: absolute;
+    right: 22px;
+    top: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.surat-user-icon i {
+    font-size: 31px;
+    color: #000000;
+}
+
+.surat-baru-content {
+    padding: 45px 75px;
+}
+
+.surat-page-title {
+    text-align: center;
+    color: #df9c4d;
+    font-size: 34px;
+    font-weight: 900;
+}
+
+.surat-page-subtitle {
+    text-align: center;
+    margin-top: 8px;
+    color: #9b9185;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.template-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    margin-top: 45px;
+}
+
+.template-card {
+    background: #fff0cf;
+    min-height: 185px;
+    border-radius: 18px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    border: 4px solid transparent;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.12);
+    transition: 0.25s;
+}
+
+.template-card:hover,
+.template-card.active-template {
+    border-color: #209bd3;
+    transform: translateY(-4px);
+}
+
+.template-icon {
+    width: 70px;
+    height: 70px;
+    background: #df9c4d;
+    border-radius: 50%;
+    margin: 0 auto 18px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-icon i {
+    font-size: 32px;
+    color: #000000;
+}
+
+.template-card h3 {
+    font-size: 20px;
+    font-weight: 900;
+    color: #222222;
+    margin-bottom: 10px;
+}
+
+.template-card p {
+    font-size: 14px;
+    font-weight: 700;
+    color: #8b8175;
+}
+
+.form-surat-baru {
+    margin-top: 45px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.13);
+}
+
+.form-surat-baru label {
+    display: block;
+    color: #333333;
+    font-size: 15px;
+    font-weight: 900;
+    margin-bottom: 8px;
+    margin-top: 18px;
+}
+
+.form-surat-baru input {
+    width: 100%;
+    height: 55px;
+    border: none;
+    outline: none;
+    background: #f3eee4;
+    border-radius: 14px;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #555555;
+    box-shadow: 3px 3px 4px rgba(0,0,0,0.18);
+}
+
+.form-surat-baru input::placeholder {
+    color: #b9b1a7;
+}
+
+.btn-simpan-surat {
+    width: 100%;
+    height: 62px;
+    margin-top: 35px;
+    background: #e3a153;
+    color: #ffffff;
+    border: none;
+    border-radius: 16px;
+    font-size: 19px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 4px 4px 5px rgba(0,0,0,0.23);
+}
+
+.btn-simpan-surat i {
+    margin-right: 8px;
+}
+
+/* ================= TEMPLATE SURAT ================= */
+
+.form-section-title {
+    margin-top: 15px;
+    margin-bottom: 18px;
+    color: #df9c4d;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.form-section-title i {
+    margin-right: 8px;
+}
+
+.template-form-box {
+    margin-top: 30px;
+    padding: 28px;
+    background: #fff7e6;
+    border-radius: 18px;
+    border: 3px solid #efd4a1;
+}
+
+.hidden-template {
+    display: none;
+}
+
+.form-surat-baru textarea {
+    width: 100%;
+    min-height: 120px;
+    border: none;
+    outline: none;
+    background: #f3eee4;
+    border-radius: 14px;
+    padding: 18px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #555555;
+    resize: vertical;
+    box-shadow: 3px 3px 4px rgba(0,0,0,0.18);
+}
+
+.form-surat-baru textarea::placeholder {
+    color: #b9b1a7;
+}
+
+/* ================= PENGAJUAN SURAT ================= */
+
+.pengajuan-content {
+    padding: 45px 45px;
+}
+
+.pengajuan-table-box {
+    margin-top: 35px;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.13);
+}
+
+.status-menunggu {
+    background: #fff0cf;
+    color: #df9c4d;
+}
+
+.status-revisi {
+    background: #209bd3;
+    color: #ffffff;
+}
+
+.status-tolak {
+    background: #d9534f;
+    color: #ffffff;
+}
+
+/* ================= DETAIL PENGAJUAN ================= */
+
+.btn-detail-pengajuan {
+    background: #df9c4d;
+    color: #ffffff;
+    padding: 8px 14px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.detail-pengajuan-content {
+    padding: 45px 65px;
+}
+
+.detail-card {
+    margin-top: 35px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.13);
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff7e6;
+    padding: 16px 20px;
+    border-radius: 14px;
+    margin-bottom: 14px;
+}
+
+.detail-row span {
+    color: #8b8175;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.detail-row strong {
+    color: #222222;
+    font-size: 15px;
+    font-weight: 900;
+    text-align: right;
+}
+
+.catatan-revisi-box {
+    margin-top: 25px;
+    background: #eaf7fd;
+    border: 3px solid #209bd3;
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.catatan-revisi-box h3 {
+    color: #209bd3;
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.catatan-revisi-box p {
+    color: #333333;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.preview-surat-box {
+    margin-top: 35px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.13);
+}
+
+.preview-surat-box h2 {
+    color: #df9c4d;
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.preview-paper {
+    background: #fffdf7;
+    border: 2px solid #ead5ac;
+    border-radius: 14px;
+    padding: 25px;
+}
+
+.preview-paper pre {
+    white-space: pre-wrap;
+    font-family: 'Nunito', sans-serif;
+    color: #222222;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.7;
+}
+
+.detail-action-box {
+    margin-top: 30px;
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+}
+
+.btn-edit-surat,
+.btn-kembali-detail {
+    min-width: 160px;
+    height: 52px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-edit-surat {
+    background: #209bd3;
+    color: #ffffff;
+}
+
+.btn-edit-surat i {
+    margin-right: 8px;
+}
+
+.btn-kembali-detail {
+    background: #df9c4d;
+    color: #ffffff;
+}
+
+/* ================= UPLOAD SURAT ================= */
+
+.upload-frame {
+    width: 610px;
+    min-height: 900px;
+    margin: 0 auto;
+    background: #f5efe4;
+    padding: 35px 32px;
+    position: relative;
+}
+
+.upload-back {
+    color: #000000;
+    font-size: 34px;
+    text-decoration: none;
+}
+
+.upload-title {
+    color: #df9c4d;
+    font-size: 31px;
+    font-weight: 900;
+    margin-top: 28px;
+}
+
+.upload-subtitle {
+    color: #c9bfb0;
+    font-size: 14px;
+    font-weight: 800;
+    margin-top: 8px;
+    margin-bottom: 18px;
+}
+
+.upload-form {
+    margin-top: 18px;
+}
+
+.upload-file-box {
+    width: 100%;
+    min-height: 190px;
+    background: #ffffff;
+    border: 2px solid #df9c4d;
+    border-radius: 10px;
+    padding: 42px 36px 30px 36px;
+    text-align: center;
+    margin-bottom: 38px;
+}
+
+.upload-file-box h3 {
+    font-size: 17px;
+    color: #111111;
+    font-weight: 900;
+}
+
+.upload-file-box p {
+    font-size: 13px;
+    color: #c6beb3;
+    font-weight: 800;
+    margin-top: 5px;
+    margin-bottom: 28px;
+}
+
+.file-input-box {
+    background: #ffffff;
+    border: 2px solid #df9c4d;
+    border-radius: 10px;
+    padding: 17px;
+}
+
+.file-input-box input {
+    width: 100%;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.upload-form label {
+    display: block;
+    font-size: 16px;
+    color: #111111;
+    font-weight: 900;
+    margin-bottom: 12px;
+    margin-top: 28px;
+}
+
+.upload-form input,
+.upload-form select {
+    width: 100%;
+    height: 62px;
+    background: #ffffff;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    padding: 0 20px;
+    color: #222222;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.upload-form select {
+    cursor: pointer;
+}
+
+.upload-form select:focus {
+    background: #4fc3e8;
+    color: #000000;
+}
+
+.upload-form input::placeholder {
+    color: #c8bfb6;
+}
+
+.btn-upload-surat {
+    width: 78px;
+    height: 36px;
+    background: #df9c4d;
+    color: #ffffff;
+    border: none;
+    border-radius: 18px;
+    margin-top: 38px;
+    margin-left: 24px;
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.btn-download-file {
+    background: #209bd3;
+    color: #ffffff !important;
+    padding: 8px 13px;
+    border-radius: 15px;
+    text-decoration: none !important;
+    font-size: 11px;
+    font-weight: 900;
+    display: inline-block;
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.btn-download-file i {
+    margin-right: 5px;
+}
+
+.btn-lihat {
+    background: #28a745;
+    color: #ffffff !important;
+    padding: 8px 13px;
+    border-radius: 15px;
+    text-decoration: none !important;
+    font-size: 11px;
+    font-weight: 900;
+    display: inline-block;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.btn-download-file {
+    background: #209bd3;
+    color: #ffffff !important;
+    padding: 8px 13px;
+    border-radius: 15px;
+    text-decoration: none !important;
+    font-size: 11px;
+    font-weight: 900;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-approve {
+    background: #28a745;
+    color: #ffffff !important;
+    padding: 7px 10px;
+    border-radius: 12px;
+    text-decoration: none !important;
+    font-size: 11px;
+    font-weight: 900;
+    display: inline-block;
+    margin-left: 4px;
+}
+
+.btn-tolak {
+    background: #dc3545;
+    color: #ffffff !important;
+    padding: 7px 10px;
+    border-radius: 12px;
+    text-decoration: none !important;
+    font-size: 11px;
+    font-weight: 900;
+    display: inline-block;
+    margin-left: 4px;
+}
+
+.btn-tolak-submit {
+    width: 100%;
+    height: 62px;
+    margin-top: 35px;
+    background: #dc3545;
+    color: #ffffff;
+    border: none;
+    border-radius: 16px;
+    font-size: 19px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 4px 4px 5px rgba(0,0,0,0.23);
+}
+
+.btn-tolak-submit i {
+    margin-right: 8px;
+}
+
+.btn-revisi {
+    background: #209bd3;
+    color: #ffffff !important;
+    padding: 7px 10px;
+    border-radius: 12px;
+    text-decoration: none !important;
+    font-size: 11px;
+    font-weight: 900;
+    display: inline-block;
+    margin-left: 4px;
+}
+
+/* ================= MODAL ================= */
+
+.custom-modal{
+    display:none;
+    position:fixed;
+    z-index:999;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.45);
+}
+
+.custom-modal-content{
+    width:520px;
+    background:#ffffff;
+    margin:60px auto;
+    padding:35px;
+    border-radius:25px;
+    box-shadow:0 0 20px rgba(0,0,0,0.25);
+}
+
+.modal-title{
+    color:#df9c4d;
+    font-size:40px;
+    font-weight:900;
+    margin-bottom:30px;
+    text-align:center;
+}
+
+.modal-group{
+    margin-bottom:20px;
+}
+
+.modal-group label{
+    display:block;
+    margin-bottom:8px;
+    color:#333333;
+    font-size:16px;
+    font-weight:800;
+}
+
+.modal-group input{
+    width:100%;
+    height:55px;
+    border:none;
+    background:#f3eee4;
+    border-radius:14px;
+    padding:0 18px;
+    font-size:15px;
+    font-weight:700;
+    outline:none;
+}
+
+.modal-group input[type="file"]{
+    padding:14px;
+}
+
+.surat-page{
+    padding:40px;
+    background:#f5f7fb;
+    min-height:100vh;
+}
+
+.surat-header{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.back-btn{
+    width:55px;
+    height:55px;
+    background:#f59e0b;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    text-decoration:none;
+    font-size:22px;
+}
+
+.surat-header h1{
+    margin:0;
+    font-size:32px;
+    font-weight:800;
+}
+
+.surat-header p{
+    margin:0;
+    color:gray;
+}
+
+.card-surat{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.card-title{
+    padding:12px 20px;
+    border-radius:12px;
+    color:white;
+    font-weight:700;
+    margin-bottom:20px;
+    width:max-content;
+}
+
+.blue{
+    background:#f59e0b
+}
+
+.green{
+    background:#16a34a;
+}
+
+.surat-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.surat-table th{
+    background:#111827;
+    color:white;
+    padding:15px;
+}
+
+.surat-table td{
+    padding:15px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.btn-preview{
+    background:#0ea5e9;
+    color:white;
+    padding:8px 15px;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.status-badge{
+    background:#22c55e;
+    color:white;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.mt-4{
+    margin-top:30px;
+}
+
+/* =========================
+ARSIP SURAT
+========================= */
+
+.arsip-wrapper{
+    padding:40px;
+}
+
+.arsip-header{
+    background:linear-gradient(135deg,#f59e0b,#ea580c);
+    padding:30px;
+    border-radius:25px;
+    color:white;
+    margin-bottom:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.arsip-header h1{
+    font-size:40px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.arsip-header p{
+    font-size:16px;
+    opacity:0.9;
+}
+
+.arsip-card{
+    background:white;
+    border-radius:25px;
+    padding:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+.arsip-title{
+    background:linear-gradient(135deg,#f59e0b,#ea580c);
+    color:white;
+    padding:12px 20px;
+    border-radius:12px;
+    width:max-content;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.arsip-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.arsip-table th{
+    background:#1e293b;
+    color:white;
+    padding:15px;
+    font-size:15px;
+}
+
+.arsip-table td{
+    padding:15px;
+    border-bottom:1px solid #e5e7eb;
+    font-size:14px;
+}
+
+.arsip-btn{
+    background:linear-gradient(135deg,#f59e0b,#ea580c);
+    color:white;
+    padding:8px 14px;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+}
+
+.arsip-status{
+    background:#16a34a;
+    color:white;
+    padding:7px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.mt-4{
+    margin-top:30px;
+}
+

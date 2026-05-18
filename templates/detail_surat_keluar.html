@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}
+Detail Surat Keluar
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow border-0 rounded-4">
+
+        <div class="card-header text-white"
+        style="background:#d8891c;">
+
+            <h3 class="mb-0">
+                <i class="bi bi-envelope-paper"></i>
+                Detail Surat Keluar
+            </h3>
+
+        </div>
+
+        <div class="card-body p-4">
+
+            <table class="table">
+
+                <tr>
+                    <th width="200">Nomor Surat</th>
+                    <td>{{ surat.nomor_surat }}</td>
+                </tr>
+
+                <tr>
+                    <th>Tujuan</th>
+                    <td>{{ surat.tujuan }}</td>
+                </tr>
+
+                <tr>
+                    <th>Perihal</th>
+                    <td>{{ surat.perihal }}</td>
+                </tr>
+
+                <tr>
+                    <th>Status</th>
+                    <td>
+
+                        <span class="badge bg-success">
+                            {{ surat.status }}
+                        </span>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Tanggal</th>
+                    <td>
+                        {{ surat.tanggal.strftime('%d-%m-%Y') }}
+                    </td>
+                </tr>
+
+            </table>
+
+            <hr>
+
+            <h5 class="mb-3">
+                Isi Surat
+            </h5>
+
+            <div class="p-4 rounded"
+            style="background:#fff8ef; line-height:1.8;">
+
+                <pre style="white-space: pre-wrap; font-family:inherit;">
+{{ surat.isi }}
+                </pre>
+
+            </div>
+
+            <div class="mt-4">
+
+                <a href="{{ url_for('surat_keluar') }}"
+                class="btn text-white"
+                style="background:#d8891c;">
+
+                    <i class="bi bi-arrow-left"></i>
+                    <a href="{{ url_for('download_pdf', id=surat.id) }}"
+class="btn btn-success me-2">
+
+    <i class="bi bi-file-earmark-pdf"></i>
+    Download PDF
+
+</a>
+                    Kembali
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

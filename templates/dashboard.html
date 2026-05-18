@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Staff</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icon -->
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+
+        body{
+            background: #f8f6f2;
+            font-family: 'Segoe UI', sans-serif;
+            color: #222;
+        }
+
+        .hero{
+            background: linear-gradient(135deg,#fff7e8,#fffdf8);
+            border-radius: 25px;
+            padding: 50px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .hero h1{
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .hero span{
+            color: #e8a126;
+        }
+
+        .hero p{
+            color: #777;
+            margin-top: 10px;
+        }
+
+        .section-title{
+            text-align: center;
+            margin-top: 70px;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2{
+            font-weight: bold;
+            color: #d88d12;
+            font-size: 40px;
+        }
+
+        .menu-card{
+            background: white;
+            border-radius: 25px;
+            padding: 40px 25px;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+
+        .menu-card:hover{
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .icon-box{
+            width: 90px;
+            height: 90px;
+            background: #fff3d8;
+            border-radius: 50%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .icon-box i{
+            font-size: 40px;
+            color: #e59a17;
+        }
+
+        .menu-card h4{
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .menu-card p{
+            color: #777;
+            font-size: 15px;
+        }
+
+        .btn-menu{
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: none;
+            background: #fff3d8;
+            color: #d88d12;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .btn-menu:hover{
+            background: #d88d12;
+            color: white;
+        }
+
+        footer{
+            text-align: center;
+            margin-top: 70px;
+            padding-bottom: 20px;
+            color: #777;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+
+        <h1>
+            Selamat Datang
+            <br>
+            <span></span>
+        </h1>
+
+        <p>
+            Kelola surat dengan mudah dan modern.
+        </p>
+
+    </div>
+
+
+    <!-- AKSI CEPAT -->
+    <div class="section-title">
+        <h2>✨ Aksi Cepat ✨</h2>
+        <p>Pilih menu untuk mengelola surat</p>
+    </div>
+
+
+    <div class="row g-4">
+
+        <!-- BUAT SURAT -->
+        <div class="col-md-4">
+            <div class="menu-card">
+
+                <div class="icon-box">
+                    <i class="bi bi-file-earmark-plus-fill"></i>
+                </div>
+
+                <h4>Buat Surat Baru</h4>
+
+                <p>
+                    Buat dan ajukan surat baru.
+                </p>
+
+                <a href="/surat-baru">
+                    <button class="btn-menu">
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                </a>
+
+            </div>
+        </div>
+
+
+        <!-- ARSIP -->
+        <div class="col-md-4">
+            <div class="menu-card">
+
+                <div class="icon-box">
+                    <i class="bi bi-folder-fill"></i>
+                </div>
+
+                <h4>Arsip Surat</h4>
+
+                <p>
+                    Lihat arsip surat yang tersimpan.
+                </p>
+
+                <a href="/arsip">
+                    <button class="btn-menu">
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                </a>
+
+            </div>
+        </div>
+
+
+        <!-- UPLOAD -->
+        <div class="col-md-4">
+            <div class="menu-card">
+
+                <div class="icon-box">
+                    <i class="bi bi-upload"></i>
+                </div>
+
+                <h4>Upload Surat</h4>
+
+                <p>
+                    Upload file surat dengan mudah.
+                </p>
+
+                <a href="/upload-surat">
+                    <button class="btn-menu">
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                </a>
+
+            </div>
+        </div>
+
+
+        <!-- CARI -->
+        <div class="col-md-6">
+            <div class="menu-card">
+
+                <div class="icon-box">
+                    <i class="bi bi-search"></i>
+                </div>
+
+                <h4>Cari Surat</h4>
+
+                <p>
+                    Cari surat berdasarkan nomor atau perihal.
+                </p>
+
+                <a href="/cari-surat">
+                    <button class="btn-menu">
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                </a>
+
+            </div>
+        </div>
+
+
+        <!-- PENGAJUAN -->
+        <div class="col-md-6">
+            <div class="menu-card">
+
+                <div class="icon-box">
+                    <i class="bi bi-file-earmark-check-fill"></i>
+                </div>
+
+                <h4>Pengajuan</h4>
+
+                <p>
+                    Lihat status pengajuan surat.
+                </p>
+
+                <a href="/pengajuan">
+                    <button class="btn-menu">
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <footer>
+        © 2026 Sistem Persuratan
+    </footer>
+
+</div>
+
+</body>
+</html>

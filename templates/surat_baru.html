@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Buat Surat Baru - My Surat</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script defer src="{{ url_for('static', filename='js/style.js') }}"></script>
+</head>
+<body>
+
+<div class="surat-baru-frame">
+
+    <div class="surat-baru-topbar">
+        <a href="{{ url_for('dashboard') }}" class="surat-back">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <div>
+            <h2>BUAT SURAT BARU</h2>
+            <p>pilih dan isi template surat</p>
+        </div>
+
+        <div class="surat-user-icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+    </div>
+
+    <div class="surat-baru-content">
+
+        <h1 class="surat-page-title">Pilih Template Surat</h1>
+        <p class="surat-page-subtitle">Tersedia 2 template: Surat Tugas dan Surat Undangan</p>
+
+        <div class="template-grid">
+            <div class="template-card" onclick="pilihTemplateSurat('tugas')">
+                <div class="template-icon">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <h3>Surat Tugas</h3>
+                <p>Untuk membuat surat tugas resmi.</p>
+            </div>
+
+            <div class="template-card" onclick="pilihTemplateSurat('undangan')">
+                <div class="template-icon">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+                <h3>Surat Undangan</h3>
+                <p>Untuk membuat surat undangan resmi.</p>
+            </div>
+        </div>
+
+        <form method="POST" class="form-surat-baru">
+
+            <input type="hidden" name="jenis_template" id="jenisTemplate" required>
+
+            <div class="form-section-title">
+                <i class="fa-solid fa-file-lines"></i>
+                Data Umum Surat
+            </div>
+
+            <label>Nomor Surat</label>
+
+<input type="text"
+name="nomor_surat"
+placeholder="Contoh: 001/MS/IV/2026"
+required>
+
+<label>Perihal</label>
+
+<input type="text"
+name="perihal"
+placeholder="Masukkan perihal surat"
+required>
+
+<label>Tujuan Surat</label>
+
+<input type="text"
+name="tujuan"
+placeholder="Masukkan tujuan surat"
+required>
+
+<label>Tanggal Surat</label>
+
+<input type="date"
+name="tanggal_surat"
+required>
+
+            <!-- FORM SURAT TUGAS -->
+            <div id="formSuratTugas" class="template-form-box hidden-template">
+
+                <div class="form-section-title">
+                    <i class="fa-solid fa-briefcase"></i>
+                    Isi Surat Tugas
+                </div>
+
+                <label>Nama Petugas</label>
+                <input type="text" name="nama_petugas" placeholder="Masukkan nama petugas">
+
+                <label>Jabatan Petugas</label>
+                <input type="text" name="jabatan_petugas" placeholder="Masukkan jabatan petugas">
+
+                <label>Tugas yang Diberikan</label>
+                <textarea name="isi_tugas" placeholder="Contoh: Melaksanakan kegiatan pendataan surat masuk dan keluar."></textarea>
+
+                <label>Tanggal Mulai Tugas</label>
+                <input type="date" name="tanggal_mulai">
+
+                <label>Tanggal Selesai Tugas</label>
+                <input type="date" name="tanggal_selesai">
+
+                <label>Tempat Tugas</label>
+                <input type="text" name="tempat_tugas" placeholder="Masukkan tempat tugas">
+            </div>
+
+            <!-- FORM SURAT UNDANGAN -->
+            <div id="formSuratUndangan" class="template-form-box hidden-template">
+
+                <div class="form-section-title">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                    Isi Surat Undangan
+                </div>
+
+                <label>Tujuan Undangan</label>
+                <input type="text" name="tujuan_undangan" placeholder="Contoh: Bapak/Ibu Staff Administrasi">
+
+                <label>Nama Acara</label>
+                <input type="text" name="nama_acara" placeholder="Contoh: Rapat Koordinasi Bulanan">
+
+                <label>Tanggal Acara</label>
+                <input type="date" name="tanggal_acara">
+
+                <label>Waktu Acara</label>
+                <input type="time" name="waktu_acara">
+
+                <label>Tempat Acara</label>
+                <input type="text" name="tempat_acara" placeholder="Contoh: Ruang Rapat Utama">
+
+                <label>Catatan Tambahan</label>
+                <textarea name="catatan_undangan" placeholder="Contoh: Diharapkan hadir tepat waktu."></textarea>
+            </div>
+
+            <button type="submit" class="btn-simpan-surat">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Simpan Surat
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

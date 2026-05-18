@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit/Revisi Surat - My Surat</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="surat-baru-frame">
+
+    <div class="surat-baru-topbar">
+        <a href="{{ url_for('pengajuan') }}" class="surat-back">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <div>
+            <h2>REVISI SURAT</h2>
+            <p>perbaiki surat lalu ajukan kembali</p>
+        </div>
+
+        <div class="surat-user-icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+    </div>
+
+    <div class="surat-baru-content">
+
+        <h1 class="surat-page-title">Edit/Revisi Surat</h1>
+        <p class="surat-page-subtitle">Setelah disimpan, status surat akan kembali menjadi Diajukan</p>
+
+        {% if surat.catatan_revisi %}
+        <div class="catatan-revisi-box">
+            <h3><i class="fa-solid fa-circle-info"></i> Catatan Revisi</h3>
+            <p>{{ surat.catatan_revisi }}</p>
+        </div>
+        {% endif %}
+
+        <form method="POST" class="form-surat-baru">
+
+            <label>Nomor Surat</label>
+            <input type="text" name="nomor_surat" value="{{ surat.nomor_surat }}" required>
+
+            <label>Perihal</label>
+            <input type="text" name="perihal" value="{{ surat.perihal }}" required>
+
+            <label>Tujuan</label>
+            <input type="text" name="tujuan" value="{{ surat.tujuan }}" required>
+
+            <button type="submit" class="btn-simpan-surat">
+                <i class="fa-solid fa-paper-plane"></i>
+                Simpan & Ajukan Ulang
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
