@@ -44,6 +44,28 @@
     </p>
 
 
+    <!-- FLASH MESSAGE -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+
+                <div style="
+                    background: white;
+                    padding: 16px;
+                    border-radius: 12px;
+                    margin-bottom: 20px;
+                    text-align: center;
+                    font-weight: bold;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                ">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
     <!-- FORM -->
     <form method="POST"
     enctype="multipart/form-data"
@@ -57,6 +79,8 @@
 
             <p>
                 Format PDF, DOCX, JPG, PNG
+                <br>
+                Maksimal ukuran file 5MB
             </p>
 
             <div class="file-input-box">

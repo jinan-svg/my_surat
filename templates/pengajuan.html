@@ -33,11 +33,14 @@
     <div class="pengajuan-content">
 
         <h1 class="surat-page-title">Daftar Pengajuan</h1>
-        <p class="surat-page-subtitle">Surat yang dibuat akan diperiksa sebelum masuk ke surat keluar</p>
+        <p class="surat-page-subtitle">
+            Surat yang dibuat akan diperiksa sebelum masuk ke surat keluar
+        </p>
 
         <div class="pengajuan-table-box">
 
             <table class="surat-table">
+
                 <thead>
                     <tr>
                         <th>No. Surat</th>
@@ -51,63 +54,95 @@
                 </thead>
 
                 <tbody>
+
                     {% for surat in data_surat %}
+
                     <tr>
+
                         <td>{{ surat.nomor_surat }}</td>
+
                         <td>{{ surat.perihal }}</td>
+
                         <td>{{ surat.tujuan }}</td>
+
                         <td>{{ surat.jenis_template }}</td>
 
                         <td>
+
                             {% if surat.status == "Diajukan" %}
-                                <span class="badge status-menunggu">Menunggu</span>
+                                <span class="badge status-menunggu">
+                                    Menunggu
+                                </span>
+
                             {% elif surat.status == "Revisi" %}
-                                <span class="badge status-revisi">Revisi</span>
+                                <span class="badge bg-primary">
+                                    Revisi
+                                </span>
+
                             {% elif surat.status == "Disetujui" %}
-                                <span class="badge status-baca">Disetujui</span>
+                                <span class="badge status-baca">
+                                    Disetujui
+                                </span>
+
                             {% elif surat.status == "Ditolak" %}
-                                <span class="badge status-tolak">Ditolak</span>
+                                <span class="badge status-tolak">
+                                    Ditolak
+                                </span>
+
                             {% else %}
-                                <span class="badge status-belum">{{ surat.status }}</span>
+                                <span class="badge status-belum">
+                                    {{ surat.status }}
+                                </span>
+
                             {% endif %}
+
                         </td>
 
                         <td>
+
                             {% if surat.catatan_revisi %}
                                 {{ surat.catatan_revisi }}
                             {% else %}
                                 -
                             {% endif %}
+
                         </td>
 
                         <td>
-                            <a href="#">
+
+                            <a href="{{ url_for('detail_pengajuan', id=surat.id) }}">
                                 Detail
                             </a>
 
-                            {% if surat.status == "Diajukan" %}
-                                <a href="{{ url_for('approve_surat_keluar', id=surat.id) }}" class="btn-approve">
-                                    Setujui
-                                </a>
+                            {% if surat.status == "Revisi" %}
 
-                                <a href="{{ url_for('tolak_surat_keluar', id=surat.id) }}" class="btn-tolak">
-                                    Tolak
-                                </a>
-                            {% endif %}
+                                <br><br>
 
-                            {% if surat.status == "Ditolak" %}
-                                <a href="{{ url_for('edit_surat_keluar', id=surat.id) }}" class="btn-revisi">
+                                <a href="{{ url_for('edit_surat_keluar', id=surat.id) }}"
+                                class="btn btn-primary btn-sm">
+
                                     Revisi
+
                                 </a>
+
                             {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+                        <td colspan="7">
+                            Belum ada pengajuan surat.
                         </td>
                     </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="7">Belum ada pengajuan surat.</td>
-                    </tr>
+
                     {% endfor %}
+
                 </tbody>
+
             </table>
 
         </div>

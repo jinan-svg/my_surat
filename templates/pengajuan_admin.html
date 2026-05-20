@@ -1,67 +1,72 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
 
-{% block title %}
-Pengajuan Admin
-{% endblock %}
+    <meta charset="UTF-8">
+    <title>Pengajuan Admin - MySurat</title>
 
-{% block content %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<div class="container mt-4">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- JUDUL -->
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
 
-    <div class="mb-4">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        <h2 style="font-weight:700; color:#d8891c;">
+</head>
 
-            Pengajuan Surat
+<body>
 
-        </h2>
+<div class="surat-baru-frame">
 
-        <p style="color:gray;">
+    <!-- TOPBAR -->
+    <div class="surat-baru-topbar">
 
-            Daftar surat yang menunggu persetujuan admin
+        <!-- PANAH -->
+        <a href="{{ url_for('dashboard_admin') }}" class="surat-back">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
 
-        </p>
+        <!-- TITLE -->
+        <div>
+            <h2>PENGAJUAN ADMIN</h2>
+            <p>kelola surat pengajuan staff</p>
+        </div>
+
+        <!-- USER -->
+        <div class="surat-user-icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
 
     </div>
 
+    <!-- CONTENT -->
+    <div class="pengajuan-content">
 
-    <!-- CARD -->
+        <h1 class="surat-page-title">
+            Pengajuan Surat
+        </h1>
 
-    <div class="card shadow-sm border-0"
-    style="border-radius:20px;">
+        <p class="surat-page-subtitle">
+            Daftar surat yang menunggu persetujuan admin
+        </p>
 
-        <!-- HEADER -->
+        <div class="pengajuan-table-box">
 
-        <div class="card-header text-white"
-        style="background:#d8891c;
-        border-radius:20px 20px 0 0;">
+            <table class="surat-table">
 
-            Surat Pending Approval
-
-        </div>
-
-
-        <!-- BODY -->
-
-        <div class="card-body">
-
-            <table class="table align-middle">
-
-                <thead style="background:#fff4df;">
-
+                <thead>
                     <tr>
-
                         <th>No</th>
                         <th>Nomor Surat</th>
                         <th>Tujuan</th>
                         <th>Perihal</th>
                         <th>Status</th>
                         <th>Aksi</th>
-
                     </tr>
-
                 </thead>
 
                 <tbody>
@@ -80,43 +85,83 @@ Pengajuan Admin
 
                         <td>
 
-                            <span class="badge"
-                            style="background:#ffc107;
-                            color:black;
-                            padding:8px 12px;
-                            border-radius:10px;">
+                            {% if surat.status == "Diajukan" %}
+                                <span class="badge status-menunggu">
+                                    Pending
+                                </span>
 
-                                {{ surat.status }}
+                            {% elif surat.status == "Disetujui" %}
+                                <span class="badge status-baca">
+                                    Disetujui
+                                </span>
 
-                            </span>
+                            {% elif surat.status == "Revisi" %}
+                                <span class="badge status-revisi">
+                                    Revisi
+                                </span>
+
+                            {% else %}
+                                <span class="badge status-tolak">
+                                    Ditolak
+                                </span>
+
+                            {% endif %}
 
                         </td>
 
-                        <td>
+                        <td style="white-space: nowrap;">
+
+                            <!-- DETAIL -->
+                            <a href="{{ url_for('detail_pengajuan', id=surat.id) }}"
+                            style="
+                            background:#0dcaf0;
+                            color:white;
+                            padding:6px 10px;
+                            border-radius:5px;
+                            text-decoration:none;
+                            margin-right:5px;
+                            display:inline-block;
+                            ">
+                                👁
+                            </a>
 
                             <!-- SETUJUI -->
-
                             <a href="{{ url_for('setujui_surat', id=surat.id) }}"
-                            class="btn btn-success btn-sm"
-                            onclick="return confirm('Setujui surat ini?')">
-
-                                <i class="bi bi-check-circle"></i>
-
+                            style="
+                            background:green;
+                            color:white;
+                            padding:6px 10px;
+                            border-radius:5px;
+                            text-decoration:none;
+                            margin-right:5px;
+                            display:inline-block;
+                            ">
+                                ✔
                             </a>
 
-
-                            <!-- TOLAK -->
-
-                            <a href="{{ url_for('tolak_surat', id=surat.id) }}"
-                            class="btn btn-danger btn-sm"
-                            onclick="return confirm('Tolak surat ini?')">
-
-                                <i class="bi bi-x-circle"></i>
-
+                            <!-- REVISI -->
+                            <a href="{{ url_for('revisi_admin', id=surat.id) }}"
+                            style="
+                            background:red;
+                            color:white;
+                            padding:6px 10px;
+                            border-radius:5px;
+                            text-decoration:none;
+                            display:inline-block;
+                            ">
+                                ✖
                             </a>
 
                         </td>
 
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+                        <td colspan="6">
+                            Belum ada pengajuan surat.
+                        </td>
                     </tr>
 
                     {% endfor %}
@@ -131,4 +176,5 @@ Pengajuan Admin
 
 </div>
 
-{% endblock %}
+</body>
+</html>

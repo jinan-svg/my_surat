@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Revisi Surat - My Surat</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="surat-baru-frame">
+
+    <!-- TOPBAR -->
+    <div class="surat-baru-topbar">
+
+        <a href="{{ url_for('pengajuan_admin') }}"
+        class="surat-back">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </a>
+
+        <div>
+            <h2>REVISI SURAT</h2>
+            <p>berikan catatan revisi untuk staff</p>
+        </div>
+
+        <div class="surat-user-icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+    </div>
+
+
+    <!-- CONTENT -->
+    <div class="detail-pengajuan-content">
+
+        <h1 class="surat-page-title">
+            Catatan Revisi
+        </h1>
+
+        <p class="surat-page-subtitle">
+            Tuliskan bagian surat yang perlu diperbaiki
+        </p>
+
+
+        <div class="detail-card">
+
+            <form method="POST">
+
+                <div class="form-group">
+
+                    <label>Catatan Revisi</label>
+
+                    <textarea
+                    name="catatan"
+                    rows="6"
+                    required
+                    placeholder="Contoh: Perbaiki tujuan surat dan tambahkan tanda tangan..."
+                    style="width:100%; padding:15px; border-radius:10px; border:1px solid #ddd;"></textarea>
+
+                </div>
+
+                <br>
+
+                <button type="submit"
+                class="btn-submit-surat">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Kirim Revisi
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

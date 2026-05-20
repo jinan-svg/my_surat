@@ -92,6 +92,8 @@ class SuratKeluar(db.Model):
         db.String(30),
         default="Pending"
     )
+    
+    catatan_revisi = db.Column(db.Text)
 
     # Pending
     # Disetujui

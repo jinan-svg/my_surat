@@ -19,6 +19,25 @@ from models import db, User, SuratMasuk, SuratKeluar
 
 app = Flask(__name__)
 
+from datetime import timedelta
+
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
+app.permanent_session_lifetime = timedelta(minutes=30)
+
+@app.errorhandler(413)
+def too_large(e):
+    flash("Ukuran file terlalu besar! Maksimal 5MB.", "danger")
+    
+    surat_disetujui = SuratKeluar.query.filter_by(status="Disetujui").all()
+
+    return render_template(
+        "upload_surat.html",
+        surat_disetujui=surat_disetujui
+    )
+
+        
+       
+
 app.config.from_object(Config)
 
 app.config["SECRET_KEY"] = "mysurat_secret_key"
@@ -35,10 +54,15 @@ with app.app_context():
 @app.route("/")
 def index():
 
-    # WAJIB LOGIN DULU
+    # BELUM LOGIN
     if "user_id" not in session:
         return redirect(url_for("login"))
 
+    # JIKA ADMIN
+    if session.get("role") == "admin":
+        return redirect(url_for("dashboard_admin"))
+
+    # JIKA STAFF
     return redirect(url_for("dashboard"))
 
 
@@ -161,6 +185,9 @@ def dashboard_admin():
     if "user_id" not in session:
         return redirect(url_for("login"))
 
+    if session.get("role") != "admin":
+        return redirect(url_for("login"))
+
     total_masuk = SuratMasuk.query.count()
     total_keluar = SuratKeluar.query.count()
     total_arsip = total_masuk + total_keluar
@@ -223,15 +250,25 @@ def pengajuan_admin():
         total_ditolak=total_ditolak
     )
 
+@app.route("/detail-pengajuan/<int:id>")
+def detail_pengajuan(id):
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    surat = SuratKeluar.query.get_or_404(id)
+
+    return render_template(
+        "detail_pengajuan.html",
+        surat=surat
+    )
+
 # =====================================
 # SETUJUI SURAT
 # =====================================
 
-@app.route("/setujui-surat/<int:id>")
+@app.route('/setujui-surat/<int:id>')
 def setujui_surat(id):
-
-    if "user_id" not in session:
-        return redirect(url_for("login"))
 
     surat = SuratKeluar.query.get_or_404(id)
 
@@ -241,18 +278,15 @@ def setujui_surat(id):
 
     flash("Surat berhasil disetujui!", "success")
 
-    return redirect(url_for("pengajuan_admin"))
+    return redirect(url_for('pengajuan_admin'))
 
 
 # =====================================
 # TOLAK SURAT
 # =====================================
 
-@app.route("/tolak-surat/<int:id>")
+@app.route('/tolak-surat/<int:id>')
 def tolak_surat(id):
-
-    if "user_id" not in session:
-        return redirect(url_for("login"))
 
     surat = SuratKeluar.query.get_or_404(id)
 
@@ -262,7 +296,33 @@ def tolak_surat(id):
 
     flash("Surat berhasil ditolak!", "error")
 
-    return redirect(url_for("pengajuan_admin"))
+    return redirect(url_for('pengajuan_admin'))
+
+@app.route("/revisi-admin/<int:id>", methods=["GET", "POST"])
+def revisi_admin(id):
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    surat = SuratKeluar.query.get_or_404(id)
+
+    if request.method == "POST":
+
+        catatan = request.form.get("catatan")
+
+        surat.status = "Revisi"
+        surat.catatan_revisi = catatan
+
+        db.session.commit()
+
+        flash("Surat dikembalikan untuk revisi!", "warning")
+
+        return redirect(url_for("pengajuan_admin"))
+
+    return render_template(
+        "revisi_admin.html",
+        surat=surat
+    )
 
 
 # =====================================
@@ -274,7 +334,11 @@ def logout():
 
     session.clear()
 
-    return redirect(url_for("login"))
+    response = redirect(url_for("login"))
+
+    response.delete_cookie("session")
+
+    return response
 
 
 # =====================================
@@ -284,9 +348,18 @@ def logout():
 @app.route("/surat-masuk", methods=["GET", "POST"])
 def surat_masuk():
 
+    # CEK LOGIN
     if "user_id" not in session:
         return redirect(url_for("login"))
 
+    # CEK ROLE ADMIN
+    if session.get("role") != "admin":
+
+        flash("Hanya admin yang bisa membuka halaman surat masuk!", "error")
+
+        return redirect(url_for("dashboard"))
+
+    # TAMBAH SURAT
     if request.method == "POST":
 
         nomor_surat = request.form.get("nomor_surat")
@@ -322,6 +395,7 @@ def surat_masuk():
 
         return redirect(url_for("surat_masuk"))
 
+    # TAMPIL DATA
     data_surat = SuratMasuk.query.order_by(
         SuratMasuk.tanggal.desc()
     ).all()
@@ -330,7 +404,6 @@ def surat_masuk():
         "surat_masuk.html",
         surat_list=data_surat
     )
-
 
 # =====================================
 # SURAT BARU
@@ -347,7 +420,12 @@ def surat_baru():
         nomor_surat = request.form.get("nomor_surat")
         tujuan = request.form.get("tujuan")
         perihal = request.form.get("perihal")
+
+        isi_tugas = request.form.get("isi_tugas")
+
         isi = request.form.get("isi")
+
+        isi = isi if isi else isi_tugas
 
         file = request.files.get("file")
 
@@ -355,6 +433,7 @@ def surat_baru():
 
         if file and file.filename != "":
             filename = secure_filename(file.filename)
+
             file.save(
                 os.path.join(
                     app.config['UPLOAD_FOLDER'],
@@ -505,9 +584,23 @@ def upload_surat():
     if request.method == "POST":
 
         surat_id = request.form.get("surat_id")
-
         file = request.files.get("file_surat")
 
+        # CEK UKURAN FILE
+        if file:
+            file.seek(0, os.SEEK_END)
+            file_length = file.tell()
+            file.seek(0)
+
+            if file_length > 5 * 1024 * 1024:
+                flash("Ukuran file terlalu besar! Maksimal 5MB.", "danger")
+
+                return render_template(
+                    "upload_surat.html",
+                    surat_disetujui=surat_disetujui
+                )
+
+        # UPLOAD FILE
         if file and surat_id:
 
             filename = secure_filename(file.filename)
@@ -528,48 +621,11 @@ def upload_surat():
 
             flash("File surat berhasil diupload!", "success")
 
-            return redirect(url_for("surat_keluar"))
+            return redirect(url_for("upload_surat"))
 
     return render_template(
         "upload_surat.html",
         surat_disetujui=surat_disetujui
-    )
-
-
-# =====================================
-# CARI SURAT
-# =====================================
-
-@app.route("/cari-surat")
-def cari_surat():
-
-    if "user_id" not in session:
-        return redirect(url_for("login"))
-
-    keyword = request.args.get("keyword")
-
-    hasil_masuk = []
-    hasil_keluar = []
-
-    if keyword:
-
-        hasil_masuk = SuratMasuk.query.filter(
-            (SuratMasuk.nomor_surat.like(f"%{keyword}%")) |
-            (SuratMasuk.pengirim.like(f"%{keyword}%")) |
-            (SuratMasuk.perihal.like(f"%{keyword}%"))
-        ).all()
-
-        hasil_keluar = SuratKeluar.query.filter(
-            (SuratKeluar.nomor_surat.like(f"%{keyword}%")) |
-            (SuratKeluar.tujuan.like(f"%{keyword}%")) |
-            (SuratKeluar.perihal.like(f"%{keyword}%"))
-        ).all()
-
-    return render_template(
-        "cari_surat.html",
-        hasil_masuk=hasil_masuk,
-        hasil_keluar=hasil_keluar,
-        keyword=keyword
     )
 
 
@@ -745,6 +801,38 @@ with app.app_context():
 # =====================================
 # RUN APP
 # =====================================
+
+@app.route("/cari-surat")
+def cari_surat():
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    keyword = request.args.get("keyword")
+
+    hasil_masuk = []
+    hasil_keluar = []
+
+    if keyword:
+
+        hasil_masuk = SuratMasuk.query.filter(
+            (SuratMasuk.nomor_surat.like(f"%{keyword}%")) |
+            (SuratMasuk.pengirim.like(f"%{keyword}%")) |
+            (SuratMasuk.perihal.like(f"%{keyword}%"))
+        ).all()
+
+        hasil_keluar = SuratKeluar.query.filter(
+            (SuratKeluar.nomor_surat.like(f"%{keyword}%")) |
+            (SuratKeluar.tujuan.like(f"%{keyword}%")) |
+            (SuratKeluar.perihal.like(f"%{keyword}%"))
+        ).all()
+
+    return render_template(
+        "cari_surat.html",
+        hasil_masuk=hasil_masuk,
+        hasil_keluar=hasil_keluar,
+        keyword=keyword
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)

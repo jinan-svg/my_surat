@@ -41,6 +41,29 @@
 
         <form method="POST" class="form-surat-baru">
 
+            {% if surat.catatan_revisi %}
+
+                <div style="
+                background:#fff3cd;
+                color:#856404;
+                padding:15px;
+                border-radius:10px;
+                margin-bottom:20px;
+                border:1px solid #ffeeba;
+                ">
+
+                    <h3 style="margin-top:0;">
+                        Catatan Revisi Admin
+                    </h3>
+
+                    <p>
+                        {{ surat.catatan_revisi }}
+                    </p>
+
+                </div>
+
+                {% endif %}
+
             <label>Nomor Surat</label>
             <input type="text" name="nomor_surat" value="{{ surat.nomor_surat }}" required>
 

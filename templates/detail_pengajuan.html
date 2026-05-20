@@ -6,110 +6,187 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
+
 <body>
 
 <div class="surat-baru-frame">
 
+    <!-- TOPBAR -->
     <div class="surat-baru-topbar">
-        <a href="{{ url_for('pengajuan') }}" class="surat-back">
+
+        <a href="{{ url_for('pengajuan_admin') }}"
+        class="surat-back">
+
             <i class="fa-solid fa-arrow-left"></i>
+
         </a>
 
         <div>
+
             <h2>DETAIL PENGAJUAN</h2>
+
             <p>lihat detail surat yang diajukan</p>
+
         </div>
 
         <div class="surat-user-icon">
+
             <i class="fa-solid fa-user"></i>
+
         </div>
+
     </div>
 
+
+    <!-- CONTENT -->
     <div class="detail-pengajuan-content">
 
-        <h1 class="surat-page-title">Detail Surat</h1>
-        <p class="surat-page-subtitle">Informasi lengkap pengajuan surat</p>
+        <h1 class="surat-page-title">
+            Detail Surat
+        </h1>
 
+        <p class="surat-page-subtitle">
+            Informasi lengkap pengajuan surat
+        </p>
+
+
+        <!-- CARD DETAIL -->
         <div class="detail-card">
 
             <div class="detail-row">
                 <span>No. Surat</span>
-                <strong>{{ surat.nomor_surat }}</strong>
-            </div>
 
-            <div class="detail-row">
-                <span>Jenis Template</span>
-                <strong>{{ surat.jenis_template }}</strong>
-            </div>
-
-            <div class="detail-row">
-                <span>Perihal</span>
-                <strong>{{ surat.perihal }}</strong>
-            </div>
-
-            <div class="detail-row">
-                <span>Tujuan</span>
-                <strong>{{ surat.tujuan }}</strong>
-            </div>
-
-            <div class="detail-row">
-                <span>Tanggal Dibuat</span>
-                <strong>{{ surat.tanggal.strftime('%d %B %Y') }}</strong>
-            </div>
-
-            <div class="detail-row">
-                <span>Status</span>
                 <strong>
-                    {% if surat.status == "Diajukan" %}
-                        <span class="badge status-menunggu">Menunggu</span>
-                    {% elif surat.status == "Revisi" %}
-                        <span class="badge status-revisi">Revisi</span>
-                    {% elif surat.status == "Disetujui" %}
-                        <span class="badge status-baca">Disetujui</span>
-                    {% elif surat.status == "Ditolak" %}
-                        <span class="badge status-tolak">Ditolak</span>
-                    {% else %}
-                        <span class="badge status-belum">{{ surat.status }}</span>
-                    {% endif %}
+                    {{ surat.nomor_surat }}
                 </strong>
             </div>
 
-            {% if surat.catatan_revisi %}
-            <div class="catatan-revisi-box">
-                <h3><i class="fa-solid fa-circle-info"></i> Catatan Revisi</h3>
-                <p>{{ surat.catatan_revisi }}</p>
+
+            <div class="detail-row">
+                <span>Jenis Template</span>
+
+                <strong>
+                    {{ surat.jenis_template }}
+                </strong>
             </div>
-            {% endif %}
+
+
+            <div class="detail-row">
+                <span>Perihal</span>
+
+                <strong>
+                    {{ surat.perihal }}
+                </strong>
+            </div>
+
+
+            <div class="detail-row">
+                <span>Tujuan</span>
+
+                <strong>
+                    {{ surat.tujuan }}
+                </strong>
+            </div>
+
+
+            <div class="detail-row">
+                <span>Status</span>
+
+                <strong>
+
+                    {% if surat.status == "Pending" %}
+
+                        <span class="badge status-menunggu">
+                            Pending
+                        </span>
+
+                    {% elif surat.status == "Disetujui" %}
+
+                        <span class="badge status-baca">
+                            Disetujui
+                        </span>
+
+                    {% elif surat.status == "Ditolak" %}
+
+                        <span class="badge status-tolak">
+                            Ditolak
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge status-belum">
+                            {{ surat.status }}
+                        </span>
+
+                    {% endif %}
+
+                </strong>
+            </div>
+
+
+            <div class="detail-row">
+                <span>Tanggal Surat</span>
+
+                <strong>
+                    {{ surat.tanggal }}
+                </strong>
+            </div>
 
         </div>
 
+
+        <!-- PREVIEW -->
         <div class="preview-surat-box">
+
             <h2>Preview Isi Surat</h2>
 
             <div class="preview-paper">
+
                 <pre>{{ surat.isi }}</pre>
+
             </div>
+
         </div>
 
+
+        <!-- BUTTON -->
         <div class="detail-action-box">
 
-    <a href="{{ url_for('edit_surat', id=surat.id) }}" class="btn-edit-surat">
-        <i class="fa-solid fa-pen-to-square"></i>
-        Edit Surat
+    <a href="{{ url_for('setujui_surat', id=surat.id) }}"
+    class="btn-aksi btn-setujui">
+
+        <i class="fa-solid fa-check"></i>
+        Setujui
+
     </a>
 
-    <a href="{{ url_for('pengajuan') }}" class="btn-kembali-detail">
+    <a href="{{ url_for('tolak_surat', id=surat.id) }}"
+    class="btn-aksi btn-tolak">
+
+        <i class="fa-solid fa-xmark"></i>
+        Tolak
+
+    </a>
+
+    <a href="{{ url_for('pengajuan_admin') }}"
+    class="btn-aksi btn-kembali">
+
+        <i class="fa-solid fa-arrow-left"></i>
         Kembali
+
     </a>
 
 </div>
-
-    </div>
 
 </div>
 

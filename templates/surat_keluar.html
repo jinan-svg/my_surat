@@ -21,6 +21,28 @@ Surat Keluar
 
     </div>
 
+    <!-- FLASH MESSAGE -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+
+            {% for category, message in messages %}
+
+                <div class="alert alert-{{ category }} alert-dismissible fade show"
+                role="alert">
+
+                    {{ message }}
+
+                    <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"></button>
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+    {% endwith %}
+
 
     <!-- CARD -->
     <div class="card shadow-sm border-0"
@@ -138,7 +160,6 @@ Surat Keluar
 
                             </a>
 
-
                             <!-- EDIT -->
                             <a href="{{ url_for('edit_surat_keluar', id=surat.id) }}"
                             class="btn btn-sm text-white"
@@ -160,15 +181,11 @@ Surat Keluar
 
                                 <i class="bi bi-trash"></i>
 
-                                
-
                             </a>
-
 
                             <!-- DOWNLOAD FILE -->
                             {% if surat.file_path %}
 
-                        
                             <a href="{{ url_for('download_file', filename=surat.file_path) }}"
                             class="btn btn-sm text-white"
                             style="background:#198754;

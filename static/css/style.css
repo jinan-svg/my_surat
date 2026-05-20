@@ -1335,3 +1335,39 @@ ARSIP SURAT
     margin-top:30px;
 }
 
+.detail-action-box{
+    display:flex;
+    gap:15px;
+    margin-top:25px;
+}
+
+.btn-aksi{
+    padding:12px 24px;
+    border-radius:10px;
+    text-decoration:none;
+    color:white;
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+}
+
+.btn-setujui{
+    background:#28a745;
+}
+
+.btn-tolak{
+    background:#dc3545;
+}
+
+.btn-kembali{
+    background:#f39c12;
+}
+
+.preview-paper{
+    background:white;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:20px;
+    min-height:120px;
+}

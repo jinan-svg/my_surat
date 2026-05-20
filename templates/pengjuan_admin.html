@@ -1,41 +1,177 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Pengajuan Admin</title>
+
+    <meta charset="UTF-8">
+    <title>Pengajuan Admin - MySurat</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
+
 <body>
 
-<h1>Dashboard Admin</h1>
+<div class="surat-baru-frame">
 
-<h3>Total Pending: {{ total_pending }}</h3>
-<h3>Total Disetujui: {{ total_disetujui }}</h3>
-<h3>Total Ditolak: {{ total_ditolak }}</h3>
+    <!-- TOPBAR -->
+    <div class="surat-baru-topbar">
 
-<hr>
+        <!-- PANAH -->
+        <a href="{{ url_for('dashboard_admin') }}" class="surat-back">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
 
-{% for surat in data_surat %}
+        <!-- TITLE -->
+        <div>
+            <h2>PENGAJUAN ADMIN</h2>
+            <p>kelola surat pengajuan staff</p>
+        </div>
 
-<div style="border:1px solid black; padding:15px; margin-bottom:10px;">
+        <!-- USER -->
+        <div class="surat-user-icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
 
-    <h3>{{ surat.nomor_surat }}</h3>
+    </div>
 
-    <p>Tujuan: {{ surat.tujuan }}</p>
+    <!-- CONTENT -->
+    <div class="pengajuan-content">
 
-    <p>Perihal: {{ surat.perihal }}</p>
+        <h1 class="surat-page-title">
+            Pengajuan Surat
+        </h1>
 
-    <p>Status: {{ surat.status }}</p>
+        <p class="surat-page-subtitle">
+            Daftar surat yang menunggu persetujuan admin
+        </p>
 
-    <a href="/setujui-surat/{{ surat.id }}">
-        <button>SETUJUI</button>
-    </a>
+        <div class="pengajuan-table-box">
 
-    <a href="/tolak-surat/{{ surat.id }}">
-        <button>TOLAK</button>
-    </a>
+            <table class="surat-table">
+
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nomor Surat</th>
+                        <th>Tujuan</th>
+                        <th>Perihal</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for surat in data_surat %}
+
+                    <tr>
+
+                        <td>{{ loop.index }}</td>
+
+                        <td>{{ surat.nomor_surat }}</td>
+
+                        <td>{{ surat.tujuan }}</td>
+
+                        <td>{{ surat.perihal }}</td>
+
+                        <td>
+
+                            {% if surat.status == "Diajukan" %}
+                                <span class="badge status-menunggu">
+                                    Pending
+                                </span>
+
+                            {% elif surat.status == "Disetujui" %}
+                                <span class="badge status-baca">
+                                    Disetujui
+                                </span>
+
+                            {% elif surat.status == "Revisi" %}
+                                <span class="badge status-revisi">
+                                    Revisi
+                                </span>
+
+                            {% else %}
+                                <span class="badge status-tolak">
+                                    Ditolak
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <!-- DETAIL -->
+                            <a href="{{ url_for('detail_pengajuan', id=surat.id) }}"
+                            style="
+                            background:#0dcaf0;
+                            color:white;
+                            padding:6px 10px;
+                            border-radius:5px;
+                            text-decoration:none;
+                            margin-right:5px;
+                            ">
+                                👁
+                            </a>
+
+                            <!-- SETUJUI -->
+                            <a href="{{ url_for('setujui_surat', id=surat.id) }}"
+                            style="
+                            background:green;
+                            color:white;
+                            padding:6px 10px;
+                            border-radius:5px;
+                            text-decoration:none;
+                            margin-right:5px;
+                            ">
+                                ✔
+                            </a>
+
+                            <!-- REVISI -->
+                            <a href="{{ url_for('revisi_admin', id=surat.id) }}"
+                            style="
+                            background:red;
+                            color:white;
+                            padding:6px 10px;
+                            border-radius:5px;
+                            text-decoration:none;
+                            ">
+                                ✖
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+                        <td colspan="6">
+                            Belum ada pengajuan surat.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
 
 </div>
-
-{% endfor %}
 
 </body>
 </html>
